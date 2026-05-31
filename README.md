@@ -1,5 +1,7 @@
 # codex-feishu-deployer
 
+English | [简体中文](./README.zh-CN.md)
+
 Deploy `cc-connect + Codex + Feishu` from a small CLI.
 
 ## Prerequisites
