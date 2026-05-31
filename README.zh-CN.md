@@ -211,6 +211,7 @@ npm install -g @larksuite/cli
 
 ```text
 .codex-feishu/LARK_DOCS.md
+AGENTS.md
 ```
 
 Codex 可以使用类似命令：
@@ -222,6 +223,8 @@ lark-cli docs +update --api-version v2 --as user --doc "<document-url-or-token>"
 ```
 
 部署器不会存储飞书文档内容。它只生成本地说明并检查 `lark-cli` 是否可用。
+
+`AGENTS.md` 很重要：它会告诉 Codex 遇到飞书/Lark 文档链接时使用 `lark-cli`，而不是尝试直接用浏览器访问这些链接。
 
 ## 预览配置
 

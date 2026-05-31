@@ -92,4 +92,25 @@ lark-cli docs +update --api-version v2 --as user \\
 `;
 }
 
+export function renderAgentsInstructions() {
+  return `# Codex Feishu Workspace Instructions
+
+When the user provides a Feishu or Lark document URL, wiki URL, or doc token, use lark-cli to access it.
+
+Do not try to browse the document URL directly. Browser/web access often lacks the user's Feishu session and will fail or show an access page.
+
+Use these commands:
+
+\`\`\`bash
+lark-cli docs +fetch --api-version v2 --as user --doc "<document-url-or-token>"
+lark-cli docs +create --api-version v2 --as user --doc-format markdown --content @./draft.md
+lark-cli docs +update --api-version v2 --as user --doc "<document-url-or-token>" --command overwrite --doc-format markdown --content @./draft.md
+\`\`\`
+
+For long content, write a local Markdown draft first and pass it with \`--content @./draft.md\`.
+
+Do not print App Secret, access tokens, refresh tokens, or private document content unless the user explicitly asks for the content.
+`;
+}
+
 export const validModes = [...VALID_MODES];

@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {
   larkCliInstallCommand,
   redactSecret,
+  renderAgentsInstructions,
   renderConfig,
   renderLarkDocsGuide,
   validateSetupAnswers
@@ -52,4 +53,11 @@ test('renderLarkDocsGuide documents lark-cli doc commands', () => {
 
 test('larkCliInstallCommand points to the official npm package', () => {
   assert.deepEqual(larkCliInstallCommand, ['npm', 'install', '-g', '@larksuite/cli']);
+});
+
+test('renderAgentsInstructions tells Codex to use lark-cli for Feishu docs', () => {
+  const instructions = renderAgentsInstructions();
+  assert.match(instructions, /Feishu or Lark document URL/);
+  assert.match(instructions, /lark-cli docs \+fetch --api-version v2 --as user/);
+  assert.match(instructions, /Do not try to browse the document URL directly/);
 });

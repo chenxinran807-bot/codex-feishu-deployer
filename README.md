@@ -211,6 +211,7 @@ When enabled, setup writes this guide into the Codex work directory:
 
 ```text
 .codex-feishu/LARK_DOCS.md
+AGENTS.md
 ```
 
 Codex can then use commands such as:
@@ -222,6 +223,8 @@ lark-cli docs +update --api-version v2 --as user --doc "<document-url-or-token>"
 ```
 
 The deployer does not store Feishu document content. It only generates local instructions and checks that `lark-cli` is available.
+
+`AGENTS.md` is important: it tells Codex to use `lark-cli` for Feishu/Lark document URLs instead of trying to browse those URLs directly.
 
 To preview the generated config without writing files or installing the daemon:
 

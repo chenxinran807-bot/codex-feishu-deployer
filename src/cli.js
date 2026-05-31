@@ -6,6 +6,7 @@ import { commandExists, expandHome, runCommand } from './system.js';
 import {
   larkCliInstallCommand,
   redactSecret,
+  renderAgentsInstructions,
   renderConfig,
   renderLarkDocsGuide,
   validModes,
@@ -61,9 +62,12 @@ async function setup(flags = {}) {
   if (answers.enableLarkDocs) {
     const guideDir = path.join(answers.workDir, '.codex-feishu');
     const guidePath = path.join(guideDir, 'LARK_DOCS.md');
+    const agentsPath = path.join(answers.workDir, 'AGENTS.md');
     await fs.mkdir(guideDir, { recursive: true, mode: 0o700 });
     await fs.writeFile(guidePath, renderLarkDocsGuide(), { mode: 0o600 });
+    await fs.writeFile(agentsPath, renderAgentsInstructions(), { mode: 0o600 });
     console.log(`Wrote ${guidePath}`);
+    console.log(`Wrote ${agentsPath}`);
   }
 
   await removeLockIfPresent(path.join(answers.workDir, '.cc-connect.codex-feishu.toml.lock'));
