@@ -53,6 +53,118 @@ The setup command asks for:
 - Permission mode
 - Whether to enable Feishu document read/write for Codex
 
+## Where to Get Setup Values
+
+### Feishu App ID
+
+Get it from your Feishu custom app:
+
+1. Open the Feishu Open Platform.
+2. Open your custom app.
+3. Go to "Credentials and Basic Info".
+4. Copy `App ID`.
+
+It usually looks like:
+
+```text
+cli_xxxxxxxxxxxxxxxx
+```
+
+### Feishu App Secret
+
+Get it from the same Feishu custom app:
+
+1. Open the Feishu Open Platform.
+2. Open your custom app.
+3. Go to "Credentials and Basic Info".
+4. Copy `App Secret`.
+
+Treat this as a secret. Do not paste it into public chats, GitHub issues, screenshots, or commits. If it leaks, rotate it in the Feishu Open Platform and run setup again.
+
+### Feishu User Open ID
+
+This is the Feishu user allowed to control your local Codex agent.
+
+The easiest way to get it is after the bot is running:
+
+```text
+/whoami
+```
+
+or:
+
+```text
+/status
+```
+
+The bot returns a line like:
+
+```text
+User ID: ou_xxxxxxxxxxxxxxxxx
+```
+
+Use that `ou_...` value.
+
+### Codex Work Directory
+
+This is the local project directory Codex will operate in.
+
+Example:
+
+```text
+/Users/alice/projects/my-app
+```
+
+Recommendations:
+
+- Use a real project directory.
+- Do not use `/`.
+- Do not use your entire home directory.
+- Start with a small trusted project while testing.
+
+### Permission Mode
+
+The permission mode controls how much Codex can do automatically.
+
+Use this if unsure:
+
+```text
+suggest
+```
+
+Available modes:
+
+| Mode | Use case |
+| --- | --- |
+| `suggest` | Safest default. Best for first-time setup. |
+| `auto-edit` | Allows automatic file edits, while keeping command execution more controlled. |
+| `full-auto` | More automation for trusted projects and experienced users. |
+| `yolo` | Highest risk. Not recommended for normal use. |
+
+### Enable Feishu Document Read/Write
+
+This option lets Codex use `lark-cli` to read and write Feishu documents.
+
+Enable it if you want to ask things like:
+
+```text
+Please summarize this Feishu document: https://example.feishu.cn/docx/...
+```
+
+or:
+
+```text
+Please turn this tutorial into a Feishu document.
+```
+
+If enabled, the machine needs `lark-cli` installed and authenticated. The deployer can install it:
+
+```bash
+npx codex-feishu-deployer setup --enable-lark-docs --install-lark-cli
+```
+
+If you only want Feishu chat to control Codex, and do not need document read/write, answer `no`.
+
 It writes:
 
 ```text
