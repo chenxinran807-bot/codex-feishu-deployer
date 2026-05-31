@@ -25,7 +25,7 @@ npm install -g cc-connect
 
 ## 飞书应用配置
 
-运行部署前，需要先在飞书开放平台（https://open.larkoffice.com/app）创建一个自建应用。
+运行部署前，需要先在飞书开放平台 https://open.larkoffice.com/app 创建一个自建应用。
 
 1. 打开飞书开放平台-开发者后台，创建自建应用。
 2. 开启应用的「机器人」能力。
