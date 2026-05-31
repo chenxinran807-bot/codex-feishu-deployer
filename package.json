@@ -1,0 +1,23 @@
+{
+  "name": "codex-feishu-deployer",
+  "version": "0.2.0",
+  "description": "Deploy cc-connect + Codex + Feishu from an interactive CLI.",
+  "type": "module",
+  "files": [
+    "bin",
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "bin": {
+    "codex-feishu-deployer": "./bin/codex-feishu-deployer.js"
+  },
+  "scripts": {
+    "test": "node --test",
+    "prepack": "npm test"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT"
+}
