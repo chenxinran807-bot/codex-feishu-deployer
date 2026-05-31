@@ -17,7 +17,7 @@
   - 如果启用飞书卡片，订阅 `card.action.trigger`
   - 创建并发布应用版本
 
-如果还没有安装 `cc-connect`：
+如果还没有安装 `cc-connect`，请在终端执行：
 
 ```bash
 npm install -g cc-connect
