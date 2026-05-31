@@ -2,7 +2,11 @@
 
 English | [简体中文](./README.zh-CN.md)
 
-Deploy `cc-connect + Codex + Feishu` from a small CLI.
+`codex-feishu-deployer` helps you turn Feishu into a remote control surface for local Codex.
+
+After deployment, you can send messages to a Feishu bot from desktop or mobile Feishu, and the bot forwards those requests to Codex running on your own machine. Codex then works inside the project directory you choose: reading files, explaining code, proposing changes, running checks, and, when enabled, reading or writing Feishu documents through `lark-cli`.
+
+The CLI automates the repetitive local setup: it generates the `cc-connect` config, connects it to your Feishu custom app, restricts access to your Feishu user ID, installs the background daemon, and optionally prepares Feishu document read/write support for Codex.
 
 ## Prerequisites
 
