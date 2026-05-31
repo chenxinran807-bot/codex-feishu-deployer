@@ -43,8 +43,10 @@ For group chats, invite the bot to the group. By default, the bot responds only 
 ## Usage
 
 ```bash
-npx codex-feishu-deployer setup
+npx github:chenxinran807-bot/codex-feishu-deployer setup
 ```
+
+This project is currently distributed from GitHub. The shorter `npx codex-feishu-deployer setup` command will work only after the package is published to npm.
 
 The setup command asks for:
 
@@ -162,7 +164,7 @@ Please turn this tutorial into a Feishu document.
 If enabled, the machine needs `lark-cli` installed and authenticated. The deployer can install it:
 
 ```bash
-npx codex-feishu-deployer setup --enable-lark-docs --install-lark-cli
+npx github:chenxinran807-bot/codex-feishu-deployer setup --enable-lark-docs --install-lark-cli
 ```
 
 If you only want Feishu chat to control Codex, and do not need document read/write, answer `no`.
@@ -180,7 +182,7 @@ and installs the `cc-connect` daemon.
 To let Codex read and write Feishu documents through `lark-cli`, run:
 
 ```bash
-npx codex-feishu-deployer setup --enable-lark-docs
+npx github:chenxinran807-bot/codex-feishu-deployer setup --enable-lark-docs
 ```
 
 This requires `lark-cli` to be installed and authenticated:
@@ -192,7 +194,7 @@ lark-cli auth status
 If `lark-cli` is missing, setup can install it from npm:
 
 ```bash
-npx codex-feishu-deployer setup --enable-lark-docs --install-lark-cli
+npx github:chenxinran807-bot/codex-feishu-deployer setup --enable-lark-docs --install-lark-cli
 ```
 
 Equivalent manual install:
@@ -220,7 +222,7 @@ The deployer does not store Feishu document content. It only generates local ins
 To preview the generated config without writing files or installing the daemon:
 
 ```bash
-npx codex-feishu-deployer setup --dry-run \
+npx github:chenxinran807-bot/codex-feishu-deployer setup --dry-run \
   --enable-lark-docs \
   --app-id cli_xxx \
   --app-secret your-secret \

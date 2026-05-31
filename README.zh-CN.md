@@ -43,8 +43,10 @@ npm install -g cc-connect
 ## 使用方式
 
 ```bash
-npx codex-feishu-deployer setup
+npx github:chenxinran807-bot/codex-feishu-deployer setup
 ```
+
+当前项目通过 GitHub 分发。只有发布到 npm 后，较短的 `npx codex-feishu-deployer setup` 命令才可用。
 
 setup 会询问：
 
@@ -170,7 +172,7 @@ suggest
 启用后，机器需要安装并认证 `lark-cli`。部署器可以自动安装：
 
 ```bash
-npx codex-feishu-deployer setup --enable-lark-docs --install-lark-cli
+npx github:chenxinran807-bot/codex-feishu-deployer setup --enable-lark-docs --install-lark-cli
 ```
 
 如果你只想用飞书聊天控制 Codex，不需要读写飞书文档，选择 `no` 即可。
@@ -180,7 +182,7 @@ npx codex-feishu-deployer setup --enable-lark-docs --install-lark-cli
 如果要让 Codex 通过 `lark-cli` 读写飞书文档，运行：
 
 ```bash
-npx codex-feishu-deployer setup --enable-lark-docs
+npx github:chenxinran807-bot/codex-feishu-deployer setup --enable-lark-docs
 ```
 
 需要先安装并认证 `lark-cli`：
@@ -192,7 +194,7 @@ lark-cli auth status
 如果机器上没有 `lark-cli`，可以让部署器从 npm 安装：
 
 ```bash
-npx codex-feishu-deployer setup --enable-lark-docs --install-lark-cli
+npx github:chenxinran807-bot/codex-feishu-deployer setup --enable-lark-docs --install-lark-cli
 ```
 
 等价的手动安装命令：
@@ -222,7 +224,7 @@ lark-cli docs +update --api-version v2 --as user --doc "<document-url-or-token>"
 不写入文件、不安装后台服务，只预览生成的配置：
 
 ```bash
-npx codex-feishu-deployer setup --dry-run \
+npx github:chenxinran807-bot/codex-feishu-deployer setup --dry-run \
   --enable-lark-docs \
   --app-id cli_xxx \
   --app-secret your-secret \
