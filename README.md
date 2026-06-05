@@ -276,6 +276,26 @@ cc-connect daemon restart
 
 This keeps thinking summaries, disables per-tool progress notifications, disables streaming preview updates, and still sends the final Codex response.
 
+## Create Separate Chat Sessions
+
+`cc-connect` separates sessions by Feishu chat context. The simplest way to isolate multiple tasks is to create different Feishu groups and invite the same bot to each group.
+
+Recommended workflow:
+
+1. Create one Feishu group per task or project.
+2. Invite the bot to the group.
+3. Mention the bot in the group and send your task.
+4. Send `/status` in each group to check the current session status.
+
+Different groups get different `session_key` values and different Codex agent sessions, so their conversation context stays isolated. For example, one group can be dedicated to Figma prototype work, while another group can be dedicated to document cleanup.
+
+Notes:
+
+- Consecutive messages in the same group reuse the same context.
+- Different groups usually get different contexts automatically.
+- If `group_reply_all = false`, mention the bot in group chats.
+- If you want a task to start from a completely fresh context, creating a new group is the most straightforward option.
+
 ## Verify
 
 Send this to your Feishu bot:
