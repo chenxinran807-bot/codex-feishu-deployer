@@ -250,6 +250,39 @@ codex-feishu-deployer uninstall
 codex-feishu-deployer doctor
 ```
 
+## 关闭工具进度提醒
+
+如果你不希望飞书里不断收到 `工具 #...: Bash` 这类中间过程提醒，但仍想保留 Codex 的思考摘要，可以手动编辑：
+
+```bash
+nano /Users/bytedance/.cc-connect/config.toml
+```
+
+把下面配置放在 `[log]` 后面、`[[projects]]` 前面：
+
+```toml
+[display]
+thinking_messages = true
+thinking_max_len = 300
+tool_messages = false
+
+[stream_preview]
+enabled = false
+```
+
+保存后重启服务：
+
+```bash
+cc-connect daemon restart
+```
+
+效果：
+
+- 保留思考摘要。
+- 不再发送每一步工具调用提醒。
+- 不再发送流式预览更新。
+- Codex 完成任务后仍会发送最终结果。
+
 ## 验证
 
 给飞书机器人发送：

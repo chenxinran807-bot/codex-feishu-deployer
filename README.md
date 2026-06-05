@@ -248,6 +248,34 @@ codex-feishu-deployer uninstall
 codex-feishu-deployer doctor
 ```
 
+## Disable Tool Progress Notifications
+
+If you do not want Feishu to receive intermediate messages such as `Tool #...: Bash`, but still want to keep Codex thinking summaries, edit:
+
+```bash
+nano /Users/bytedance/.cc-connect/config.toml
+```
+
+Place this after `[log]` and before `[[projects]]`:
+
+```toml
+[display]
+thinking_messages = true
+thinking_max_len = 300
+tool_messages = false
+
+[stream_preview]
+enabled = false
+```
+
+Then restart the daemon:
+
+```bash
+cc-connect daemon restart
+```
+
+This keeps thinking summaries, disables per-tool progress notifications, disables streaming preview updates, and still sends the final Codex response.
+
 ## Verify
 
 Send this to your Feishu bot:
