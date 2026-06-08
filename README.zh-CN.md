@@ -226,6 +226,42 @@ lark-cli docs +update --api-version v2 --as user --doc "<document-url-or-token>"
 
 `AGENTS.md` 很重要：它会告诉 Codex 遇到飞书/Lark 文档链接时使用 `lark-cli`，而不是尝试直接用浏览器访问这些链接。
 
+### 沙箱 DNS 受限时读取文档
+
+有些 Codex 运行环境无法解析 `open.feishu.cn`，这时会看到类似错误：
+
+```text
+lookup open.feishu.cn: no such host
+```
+
+这不是飞书授权问题，而是 Codex 沙箱网络问题。启用飞书文档能力后，部署器会写入两个本地桥接脚本：
+
+```text
+.codex-feishu/lark-doc-request.mjs
+.codex-feishu/lark-doc-worker.mjs
+```
+
+在普通终端里启动 worker：
+
+```bash
+cd /path/to/codex-work-dir
+node .codex-feishu/lark-doc-worker.mjs --watch
+```
+
+这个 worker 运行在正常本机环境里，负责执行真正的 `lark-cli` 请求。之后 Codex 可以在沙箱里创建本地请求：
+
+```bash
+node .codex-feishu/lark-doc-request.mjs "https://example.feishu.cn/docx/..."
+```
+
+命令会返回一个本地 Markdown 文件路径，例如：
+
+```text
+Result Markdown: /path/to/project/.codex-feishu/bridge/results/<request-id>.md
+```
+
+Codex 读取这个本地 Markdown 文件即可获得飞书文档内容，不需要直接访问飞书网络。
+
 ## 预览配置
 
 不写入文件、不安装后台服务，只预览生成的配置：

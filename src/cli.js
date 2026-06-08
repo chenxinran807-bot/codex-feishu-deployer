@@ -7,6 +7,8 @@ import {
   larkCliInstallCommand,
   redactSecret,
   renderAgentsInstructions,
+  renderLarkBridgeRequestScript,
+  renderLarkBridgeWorkerScript,
   renderConfig,
   renderLarkDocsGuide,
   validModes,
@@ -62,11 +64,17 @@ async function setup(flags = {}) {
   if (answers.enableLarkDocs) {
     const guideDir = path.join(answers.workDir, '.codex-feishu');
     const guidePath = path.join(guideDir, 'LARK_DOCS.md');
+    const requestScriptPath = path.join(guideDir, 'lark-doc-request.mjs');
+    const workerScriptPath = path.join(guideDir, 'lark-doc-worker.mjs');
     const agentsPath = path.join(answers.workDir, 'AGENTS.md');
     await fs.mkdir(guideDir, { recursive: true, mode: 0o700 });
     await fs.writeFile(guidePath, renderLarkDocsGuide(), { mode: 0o600 });
+    await fs.writeFile(requestScriptPath, renderLarkBridgeRequestScript(), { mode: 0o700 });
+    await fs.writeFile(workerScriptPath, renderLarkBridgeWorkerScript(), { mode: 0o700 });
     await fs.writeFile(agentsPath, renderAgentsInstructions(), { mode: 0o600 });
     console.log(`Wrote ${guidePath}`);
+    console.log(`Wrote ${requestScriptPath}`);
+    console.log(`Wrote ${workerScriptPath}`);
     console.log(`Wrote ${agentsPath}`);
   }
 

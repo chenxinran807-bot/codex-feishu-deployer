@@ -226,6 +226,42 @@ The deployer does not store Feishu document content. It only generates local ins
 
 `AGENTS.md` is important: it tells Codex to use `lark-cli` for Feishu/Lark document URLs instead of trying to browse those URLs directly.
 
+### Read Documents When Sandbox DNS Is Restricted
+
+Some Codex environments cannot resolve `open.feishu.cn`. In that case, direct document fetches fail with an error like:
+
+```text
+lookup open.feishu.cn: no such host
+```
+
+This is a Codex sandbox networking issue, not a Feishu authorization issue. When Feishu document support is enabled, setup writes two local bridge scripts:
+
+```text
+.codex-feishu/lark-doc-request.mjs
+.codex-feishu/lark-doc-worker.mjs
+```
+
+Start the worker from a normal terminal:
+
+```bash
+cd /path/to/codex-work-dir
+node .codex-feishu/lark-doc-worker.mjs --watch
+```
+
+The worker runs outside the Codex sandbox and performs the real `lark-cli` request. Codex can then create a local request from inside the sandbox:
+
+```bash
+node .codex-feishu/lark-doc-request.mjs "https://example.feishu.cn/docx/..."
+```
+
+The command prints a local Markdown path, for example:
+
+```text
+Result Markdown: /path/to/project/.codex-feishu/bridge/results/<request-id>.md
+```
+
+Codex should read that local Markdown file to access the Feishu document content without direct Feishu network access.
+
 To preview the generated config without writing files or installing the daemon:
 
 ```bash

@@ -4,6 +4,8 @@ import {
   larkCliInstallCommand,
   redactSecret,
   renderAgentsInstructions,
+  renderLarkBridgeRequestScript,
+  renderLarkBridgeWorkerScript,
   renderConfig,
   renderLarkDocsGuide,
   validateSetupAnswers
@@ -48,6 +50,7 @@ test('renderLarkDocsGuide documents lark-cli doc commands', () => {
   assert.match(guide, /lark-cli docs \+fetch --api-version v2/);
   assert.match(guide, /lark-cli docs \+create --api-version v2/);
   assert.match(guide, /lark-cli docs \+update --api-version v2/);
+  assert.match(guide, /lark-doc-worker\.mjs --watch/);
   assert.match(guide, /Do not print App Secret/);
 });
 
@@ -58,6 +61,21 @@ test('larkCliInstallCommand points to the official npm package', () => {
 test('renderAgentsInstructions tells Codex to use lark-cli for Feishu docs', () => {
   const instructions = renderAgentsInstructions();
   assert.match(instructions, /Feishu or Lark document URL/);
-  assert.match(instructions, /lark-cli docs \+fetch --api-version v2 --as user/);
+  assert.match(instructions, /lark-doc-request\.mjs/);
+  assert.match(instructions, /sandbox cannot resolve open\.feishu\.cn/);
   assert.match(instructions, /Do not try to browse the document URL directly/);
+});
+
+test('renderLarkBridgeRequestScript creates a file queue request helper', () => {
+  const script = renderLarkBridgeRequestScript();
+  assert.match(script, /path\.join\(bridgeDir, 'requests'\)/);
+  assert.match(script, /Result Markdown:/);
+  assert.match(script, /lark-doc-worker\.mjs --watch/);
+});
+
+test('renderLarkBridgeWorkerScript creates a lark-cli worker helper', () => {
+  const script = renderLarkBridgeWorkerScript();
+  assert.match(script, /lark-cli/);
+  assert.match(script, /\['docs', '\+fetch'/);
+  assert.match(script, /path\.join\(bridgeDir, 'results'\)/);
 });
